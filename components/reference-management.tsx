@@ -9,7 +9,6 @@ interface ReferenceData {
   description: string;
   referenceType: "individual" | "set";
   file: File | null;
-  // Añade más campos según sea necesario
 }
 
 export function ReferenceManagementComponent() {

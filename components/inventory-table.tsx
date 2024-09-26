@@ -247,6 +247,10 @@ export default function InventoryTable() {
     return acc;
   }, {} as Record<string, InventoryItem[]>);
 
+  const calculateSectionTotal = (items: InventoryItem[]) => {
+    return items.reduce((total, item) => total + item.quantity, 0);
+  };
+
   return (
     <div className="container mx-auto p-4">
       {Object.entries(groupedInventory).map(([section, items]) => (
@@ -312,6 +316,15 @@ export default function InventoryTable() {
                   </TableCell>
                 </TableRow>
               ))}
+              <TableRow>
+                <TableCell colSpan={2} className="font-bold text-right">
+                  Total {section}:
+                </TableCell>
+                <TableCell className="font-bold">
+                  {calculateSectionTotal(items)}
+                </TableCell>
+                <TableCell />
+              </TableRow>
             </TableBody>
           </Table>
         </div>

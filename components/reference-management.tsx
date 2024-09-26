@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import CreateReferenceModal from "./create-reference-modal";
+import Link from "next/link";
 
 interface ReferenceData {
   code: string;
@@ -13,6 +14,7 @@ interface ReferenceData {
 
 export function ReferenceManagementComponent() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [showLotesLink, setShowLotesLink] = useState(false);
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
@@ -23,13 +25,20 @@ export function ReferenceManagementComponent() {
   };
 
   const handleCreateReference = (data: ReferenceData) => {
-    // Aquí normalmente enviarías estos datos a tu backend o sistema de gestión de estado
     console.log("Nueva referencia creada:", data);
+    setShowLotesLink(true);
   };
 
   return (
     <div className="p-4">
       <Button onClick={handleOpenModal}>Crear referencia</Button>
+      {showLotesLink && (
+        <div className="mt-4">
+          <Link href="/listado-lotes" className="text-blue-600 hover:underline">
+            Ver listado de lotes
+          </Link>
+        </div>
+      )}
       <CreateReferenceModal
         isOpen={isModalOpen}
         onClose={handleCloseModal}
